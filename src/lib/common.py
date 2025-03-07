@@ -10,8 +10,6 @@ from src.lib.constants import GITHUB_ORG, GITHUB_API_URL, HEADERS, TODAY, CACHE_
 logging.basicConfig(level=logging.INFO)
 
 
-
-
 def _get_repos():
     """Fetch all repositories in the given GitHub organization."""
     url = f"{GITHUB_API_URL}/orgs/{GITHUB_ORG}/repos"
@@ -32,6 +30,8 @@ def _get_repos():
 
 
 _kbase_repos_cache = None
+
+
 def get_all_kbase_repos():
     """ Check if cache exists with today's date, if not, fetch all KBase repos"""
     # Check if cache exists with today's date
@@ -51,7 +51,3 @@ def get_all_kbase_repos():
         json.dump(repos, f, indent=4)
     _kbase_repos_cache = repos
     return _kbase_repos_cache
-
-
-
-

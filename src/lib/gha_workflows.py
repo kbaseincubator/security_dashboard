@@ -32,7 +32,6 @@ def _get_workflow_runs(repo, workflow_id, branch=None, last_n=5):
     return resp.json().get("workflow_runs", [])
 
 
-
 def get_last_n_workflow_runs(last_n=5):
     """
     Get the last 'n' runs for all workflows containing 'test' in the name,
@@ -43,7 +42,6 @@ def get_last_n_workflow_runs(last_n=5):
                          '.github/workflows/release-main.yml', '.github/workflows/release.yml',
                          '.github/workflows/build_test_pr.yaml', '.github/workflows/build_prodrc_pr.yaml',
                          '.github/workflows/tag_latest_image.yaml']
-
 
     actions = get_cached_actions_for_all_repos(get_all_kbase_repos())
 
@@ -75,8 +73,6 @@ def get_last_n_workflow_runs(last_n=5):
         json.dump(last_n_runs, f, indent=4)
 
     return last_n_runs
-
-
 
 
 def get_cached_actions_for_all_repos(repos):

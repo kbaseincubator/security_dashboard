@@ -5,7 +5,6 @@ def get_test_results(repo_full_name, default_branch="main"):
     last_n_actions = get_last_n_workflow_runs(1)
     last_actions = last_n_actions.get(repo_full_name, {})
 
-
     tests = {}
 
     for action_path in last_actions:

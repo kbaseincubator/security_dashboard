@@ -12,7 +12,6 @@ TODAY = datetime.now().strftime("%Y-%m-%d")
 CACHE_DIR = os.getcwd() + "/cache"
 REPORTS_DIR = os.getcwd() + "/reports"
 
-
 CORE_REPOS = [
     "kbase/auth2",
     "jgi-kbase/AssemblyHomologyService",

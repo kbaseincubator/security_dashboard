@@ -44,7 +44,6 @@ def get_open_dependabot_prs(repo_full_name: str) -> dict | list:
     return fetch_json(url, params=params)
 
 
-
 def get_dependabot_security_alerts_for_all_repos() -> dict:
     """
     Fetch Dependabot alerts for all KBase repositories using caching.
@@ -56,7 +55,6 @@ def get_dependabot_security_alerts_for_all_repos() -> dict:
         return {repo["full_name"]: get_dependabot_alerts(repo["full_name"]) for repo in get_all_kbase_repos()}
 
     return retrieve_cached_data("dependabot_alerts", get_alerts)
-
 
 
 def get_open_dependabot_prs_for_all_repos() -> dict:
@@ -72,7 +70,7 @@ def get_open_dependabot_prs_for_all_repos() -> dict:
     return retrieve_cached_data("dependabot_prs", get_prs)
 
 
-def get_open_dependabot_prs_for_repo(repo_full_name: str ) -> int:
+def get_open_dependabot_prs_for_repo(repo_full_name: str) -> int:
     """
     Return the number of open Dependabot pull requests for the specified repository.
     Uses cached data if available, otherwise fetches the data.
