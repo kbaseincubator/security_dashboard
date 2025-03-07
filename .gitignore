@@ -1,9 +1,10 @@
-.DS_Store
-.idea
-test/test.cfg
-test_local
-__pycache__
-.vscode
-deploy.cfg
-.coverage
-test/test_temp/
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
