@@ -5,7 +5,7 @@ from collections import defaultdict
 
 import requests
 
-from src.lib.common import timed, get_all_kbase_repos
+from src.lib.common import get_all_kbase_repos
 from src.lib.constants import GITHUB_API_URL, HEADERS, TODAY
 
 
@@ -32,7 +32,7 @@ def _get_workflow_runs(repo, workflow_id, branch=None, last_n=5):
     return resp.json().get("workflow_runs", [])
 
 
-@timed
+
 def get_last_n_workflow_runs(last_n=5):
     """
     Get the last 'n' runs for all workflows containing 'test' in the name,
@@ -49,7 +49,6 @@ def get_last_n_workflow_runs(last_n=5):
 
     cache_file = f"cache/actions_last_{last_n}_cache_{TODAY}.json"
     if os.path.exists(cache_file) and os.path.getsize(cache_file) > 0:
-        logging.info(f"Using cache file: {cache_file}")
         with open(cache_file, "r") as f:
             return json.load(f)
 
@@ -79,12 +78,11 @@ def get_last_n_workflow_runs(last_n=5):
 
 
 
-@timed
+
 def get_cached_actions_for_all_repos(repos):
     """Fetch the GitHub Actions workflows for a given repository."""
     cache_file = f"cache/actions_cache_{TODAY}.json"
     if os.path.exists(cache_file) and os.path.getsize(cache_file) > 0:
-        logging.info(f"Using cache file: {cache_file}")
         with open(cache_file, "r") as f:
             return json.load(f)
     else:

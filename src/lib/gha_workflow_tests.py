@@ -19,9 +19,6 @@ def get_test_results(repo_full_name, default_branch="main"):
         else:
             tests[action_path] = "N/A"
 
-    if repo_full_name == "kbase/execution_engine2":
-        print(tests)
-
     for item in tests.values():
         if item is not True:
             return False

@@ -5,18 +5,23 @@ from collections import defaultdict
 
 import requests
 
+from src.lib.common import get_all_kbase_repos
 from src.lib.constants import TODAY
-from src.lib.common import get_all_kbase_repos, timed
 
-### Contains functions to interact with Codecov API
+_coverage_cache = None
+
 
 def get_codecov_coverage_for_all_repos():
     """Get the coverage for all KBase repositories on 'main', 'master', and 'develop' branches."""
+    global _coverage_cache
+    if _coverage_cache:
+        return _coverage_cache
 
     ccf = f"cache/coverage_cache_{TODAY}.json"
     if os.path.exists(ccf) and os.path.getsize(ccf) > 0:
         with open(ccf, "r") as f:
-            return json.load(f)
+            _coverage_cache = json.load(f)
+            return _coverage_cache
 
     coverage = defaultdict(lambda: defaultdict(dict))
 
@@ -27,8 +32,8 @@ def get_codecov_coverage_for_all_repos():
 
     with open(ccf, "w") as f:
         json.dump(coverage, f, indent=4)
-
-    return coverage
+    _coverage_cache = coverage
+    return _coverage_cache
 
 
 def get_codecov_coverage(owner, repo, branch):
@@ -60,5 +65,3 @@ def get_codecov_coverage(owner, repo, branch):
     except Exception as e:
         print(f"Exception calling Codecov: {e}")
         return 0
-
-#
